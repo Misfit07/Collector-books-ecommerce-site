@@ -1,0 +1,215 @@
+// Prisma schema for The Antiquarian Rare Book & Manuscript Guild
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String
+  role          String    @default("CUSTOMER") // CUSTOMER | ADMIN
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  orders        Order[]
+  offers        Offer[]
+  bids          Bid[]
+  wishlists     Wishlist[]
+  reservations  CartReservation[]
+  subscriptions NotificationSubscription[]
+}
+
+model BookListing {
+  id                String    @id @default(cuid())
+  slug              String    @unique
+  title             String
+  author            String
+  publisher         String
+  year              Int
+  editionPrinting   String    // e.g. "First Edition, First Printing"
+  isbn              String?   // optional for antiquarian
+  conditionGrade    String    // FINE | VERY_GOOD | GOOD | FAIR | POOR
+  dustJacket        String    // AS_ISSUED | PRESENT_CLIPPED | PRESENT_DAMAGED | LACKING | NOT_ISSUED
+  isSigned          Boolean   @default(false)
+  isInscribed       Boolean   @default(false)
+  isFirstEdition    Boolean   @default(false)
+  isIllustrated     Boolean   @default(false)
+  isAntiquarian     Boolean   @default(false)
+  provenanceNotes   String    // Detailed chain of ownership / ex-libris notes
+  defectNotes       String    // Foxing, edge wear, spine toning, etc.
+  priceInCents      Int       // Stored in cents (e.g., $4,500.00 = 450000)
+  status            String    @default("AVAILABLE") // AVAILABLE | RESERVED | SOLD | IN_AUCTION
+  tags              String    @default("") // Comma-separated tags (e.g. "first-edition,signed,high-fantasy")
+  featured          Boolean   @default(false)
+  curatorPick       Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  images            BookImage[]
+  certificate       AuthenticityCertificate?
+  reservation       CartReservation?
+  auction           TimedAuction?
+  offers            Offer[]
+  orderItem         OrderItem?
+  wishlistEntries   Wishlist[]
+  subscriptions     NotificationSubscription[]
+}
+
+model BookImage {
+  id           String      @id @default(cuid())
+  bookId       String
+  book         BookListing @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  url          String
+  caption      String?
+  displayOrder Int         @default(0)
+  isCover      Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+
+  @@index([bookId])
+}
+
+model CartReservation {
+  id            String      @id @default(cuid())
+  bookId        String      @unique
+  book          BookListing @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  sessionId     String      // Unique visitor/cart session token
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  reservedUntil DateTime    // Exact timestamp when 15-min reservation expires
+  createdAt     DateTime    @default(now())
+
+  @@index([sessionId])
+  @@index([reservedUntil])
+}
+
+model AuthenticityCertificate {
+  id                String      @id @default(cuid())
+  certificateNumber String      @unique // e.g. "CERT-1925-GATSBY-0492"
+  bookId            String      @unique
+  book              BookListing @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  verificationCode  String      @unique // secure random token
+  signatureSha256   String      // Cryptographic hash of title + author + year + edition + examiner
+  examinerName      String      // e.g. "Julian Vance, ABAA / ILAB Appraiser"
+  examinerTitle     String      // e.g. "Senior Antiquarian Specialist"
+  issuedAt          DateTime    @default(now())
+  metadataJson      String      @default("{}") // Additional appraisal notes & seal data
+}
+
+model TimedAuction {
+  id                  String      @id @default(cuid())
+  bookId              String      @unique
+  book                BookListing @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  startingBidInCents  Int
+  reservePriceInCents Int         @default(0)
+  currentBidInCents   Int
+  bidIncrementInCents Int         @default(5000) // $50 increment
+  startTime           DateTime
+  endTime             DateTime    // Extensible by anti-snipe logic
+  autoExtendMinutes   Int         @default(5)
+  status              String      @default("ACTIVE") // DRAFT | ACTIVE | ENDED | CANCELLED
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  bids                Bid[]
+}
+
+model Bid {
+  id            String       @id @default(cuid())
+  auctionId     String
+  auction       TimedAuction @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amountInCents Int
+  createdAt     DateTime     @default(now())
+
+  @@index([auctionId])
+  @@index([userId])
+}
+
+model Offer {
+  id                  String      @id @default(cuid())
+  bookId              String
+  book                BookListing @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  userId              String?
+  user                User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestEmail          String
+  guestName           String
+  offerAmountInCents  Int
+  counterAmountInCents Int?
+  buyerNote           String?
+  adminNote           String?
+  status              String      @default("PENDING") // PENDING | ACCEPTED | COUNTERED | REJECTED | EXPIRED
+  expiresAt           DateTime?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  @@index([bookId])
+}
+
+model Order {
+  id                  String      @id @default(cuid())
+  orderNumber         String      @unique // e.g. "ORD-2026-98124"
+  userId              String?
+  user                User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerEmail       String
+  customerName        String
+  shippingAddressJson String      // JSON string of street, city, state, postalCode, country
+  totalInCents        Int
+  status              String      @default("PAID") // PENDING | PAID | SHIPPED | CANCELLED
+  paymentMethod       String      @default("RAZORPAY")
+  razorpayOrderId     String?
+  razorpayPaymentId   String?
+  razorpaySignature   String?
+  trackingNumber      String?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  items               OrderItem[]
+}
+
+model OrderItem {
+  id           String      @id @default(cuid())
+  orderId      String
+  order        Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  bookId       String      @unique
+  book         BookListing @relation(fields: [bookId], references: [id], onDelete: Restrict)
+  priceInCents Int
+  title        String
+  author       String
+  edition      String
+
+  @@index([orderId])
+}
+
+model Wishlist {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookId    String
+  book      BookListing @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
+
+  @@unique([userId, bookId])
+}
+
+model NotificationSubscription {
+  id         String       @id @default(cuid())
+  email      String
+  userId     String?
+  user       User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  type       String       // SOLD_OUT_ITEM | AUTHOR_NEW_LISTINGS
+  bookId     String?
+  book       BookListing? @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  authorName String?
+  notified   Boolean      @default(false)
+  createdAt  DateTime     @default(now())
+
+  @@index([email])
+  @@index([authorName])
+}

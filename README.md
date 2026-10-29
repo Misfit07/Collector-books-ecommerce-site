@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Antiquarian Guild — Rare Books & Manuscripts E-Commerce Platform
 
-## Getting Started
+An editorial, auction-house grade e-commerce platform for rare books, first editions, signed copies, vintage, and out-of-print titles.
 
-First, run the development server:
+Built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **SQLite/PostgreSQL**, **NextAuth**, and **Razorpay** in test mode.
 
+---
+
+## 🏛️ Domain Architecture & Antiquarian Core Rules
+
+1. **Unique-Item Inventory (`quantity = 1`)**:
+   - Every physical volume is unique.
+   - Adding a volume to your portfolio initiates an atomic **15-minute exclusive reservation hold** in the database (`prisma.$transaction`).
+   - Active holds prevent competing collectors from double-booking. Stale holds auto-expire after 15 minutes and return to public availability.
+2. **Forensic Physical Metadata**:
+   - Condition Grades: **Fine**, **Very Good**, **Good**, **Fair**, **Poor** (governed by ABAA / ILAB codes).
+   - Dust Jacket States: *As Issued*, *Present (Clipped)*, *Present (Minor Wear)*, *Lacking*, *Not Issued*.
+   - Provenance Ledger: Ownership chains, ex-libris plates, auction records.
+   - Defect Notes: Microscopic foxing patterns, spine rubbing, deckle edge state.
+   - 6+ High-Resolution archival photographs per listing with interactive magnifying loupe.
+3. **Cryptographic Certificate of Authenticity**:
+   - Every rare or signed specimen receives a permanent Certificate with unique ID (e.g. `CERT-1925-GAT-3128`), examiner signatures, physical paper/binding analysis, and dynamic QR code resolving to public verification URL `/certificate/[certificateNumber]`.
+4. **Make-an-Offer Flow**:
+   - Buyers can submit private acquisition proposals. Curators can review, propose counter-offers with 48-hour expiration, or accept/decline.
+5. **Anti-Snipe Timed Auctions**:
+   - Real-time bidding on select institutional lots.
+   - 5-minute auto-extension trigger when a bid is placed within 5 minutes of closing.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+- **Node.js** v20+ or v22+
+- **npm** v10+
+
+### 2. Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+cd ecommerce
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Setup
+Copy the template configuration:
+```bash
+cp .env.example .env
+```
+Default `.env` settings:
+```env
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="antiquarian-secret-guild-key-9821371283"
+RAZORPAY_KEY_ID="rzp_test_SbLNunYxrzDbmw"
+RAZORPAY_KEY_SECRET="xrfVisBaUsgZ880FJdj2Pq14"
+NEXT_PUBLIC_RAZORPAY_KEY_ID="rzp_test_SbLNunYxrzDbmw"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Database Setup & Seed (43+ Realistic Masterpieces)
+```bash
+# Push Prisma schema to local database
+npx prisma db push
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Seed 40+ realistic collectible titles with 6+ photos, provenance, and certificates
+npm run db:seed
+```
 
-## Learn More
+### 5. Start Development Server
+```bash
+npm run dev
+```
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔑 Demo Profiles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Role | Email | Password | Access |
+| :--- | :--- | :--- | :--- |
+| **Senior Curator (Admin)** | `admin@antiquarianguild.com` | `admin123` | Full Curatorial House (`/admin`), intake desk, offer workbench, live reservations monitor, order fulfillment. |
+| **Collector (Customer)** | `collector@antiquarianguild.com` | `collector123` | Acquisition ledger (`/account`), saved wishlist, author alerts, submitted offers. |
 
-## Deploy on Vercel
+*(Quick-fill demo buttons are provided directly on the `/login` page).*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧪 Automated Testing
+
+Run the Vitest integration suite covering 15-minute concurrency locks, double-booking prevention, expiration re-claims, and auction anti-snipe auto-extension:
+```bash
+npm test
+```
+
+---
+
+## 🧭 Route Map
+
+- `/` – Editorial Home with Featured Masterpieces, Live Auctions, and Curators' Highlights.
+- `/catalog` – Comprehensive catalogue with multifaceted filters (Author, Year Range, Condition Grade, Dust Jacket, Signed, Price, Category Tags) and full-text search.
+- `/catalog/[slug]` – Deep specimen dossier with 6+ photo gallery, magnifying loupe zoom, provenance ledger, defect notes, 15-min reservation hold, and make-an-offer drawer.
+- `/certificate/[certificateNumber]` – Public verifiable Certificate of Authenticity with SHA-256 seal, physical collation notes, and dynamic QR code.
+- `/cart` – Active Portfolio with live 15-minute countdown clock and auto-release.
+- `/checkout` – Secure checkout with Razorpay test mode integration.
+- `/orders/[orderNumber]` – Formal deed of acquisition, white-glove packaging tracker, and certificate links.
+- `/account` – Collector acquisition ledger and certificates.
+- `/account/wishlist` – Saved titles and author acquisition alerts.
+- `/account/offers` – Make-an-offer proposal status and counter-offer responses.
+- `/admin` – Curatorial Executive Desk with real-time analytics.
+- `/admin/inventory` & `/admin/inventory/new` – 30+ attribute intake suite with multi-image manager and certificate generator.
+- `/admin/offers` – Curators' offer negotiation workbench (Accept / Counter / Reject).
+- `/admin/reservations` – Live active cart reservation monitor with Force-Release capability.
+- `/admin/orders` – Order fulfillment and white-glove dispatch workbench.
