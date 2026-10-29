@@ -72,10 +72,10 @@ export default function AdminReservationsClient({
             className="text-xs font-mono uppercase tracking-wider text-[#8E867B] hover:text-[#1A1816] flex items-center gap-1 mb-2"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Executive Overview</span>
+            <span>Return to Admin Overview</span>
           </Link>
           <h1 className="text-3xl font-serif font-bold text-[#1A1816]">
-            Active Cart 15-Minute Exclusivity Holds
+            Active Cart Reservations
           </h1>
           <p className="text-xs text-[#5C564E] mt-1 font-mono">
             {reservations.length} Singularity Locks Active in System

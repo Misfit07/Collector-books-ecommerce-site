@@ -32,13 +32,13 @@ export default function CartPage() {
           className="text-xs font-mono uppercase tracking-wider text-[#8E867B] hover:text-[#1A1816] flex items-center gap-1.5 mb-2"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Return to The Vault</span>
+          <span>Back to Catalogue</span>
         </Link>
         <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#1A1816]">
-          Acquisition Portfolio &amp; Active Holds
+          Shopping Cart
         </h1>
         <p className="text-xs sm:text-sm text-[#5C564E] mt-1">
-          Items below are under your exclusive 15-minute temporary reservation.
+          Each singular copy is reserved exclusively for you for 15 minutes.
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default function CartPage() {
               href="/catalog"
               className="px-6 py-3 bg-[#1A1816] hover:bg-[#B38838] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors inline-block"
             >
-              Enter The Vault Catalogue
+              Explore Catalogue
             </Link>
           </div>
         </div>

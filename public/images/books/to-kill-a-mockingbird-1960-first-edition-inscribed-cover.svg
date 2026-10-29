@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 880" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGrad" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#33241b" />
+      <stop offset="100%" stop-color="#1a120d" />
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3e5a5" />
+      <stop offset="35%" stop-color="#cca338" />
+      <stop offset="70%" stop-color="#9d7416" />
+      <stop offset="100%" stop-color="#deb74a" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="880" rx="8" fill="url(#bgGrad)" />
+  
+  <rect x="0" y="0" width="34" height="880" fill="#000" opacity="0.3" />
+  <line x1="34" y1="0" x2="34" y2="880" stroke="#000" stroke-width="2" opacity="0.5" />
+  <line x1="36" y1="0" x2="36" y2="880" stroke="url(#gold)" stroke-width="0.75" opacity="0.4" />
+
+  <rect x="52" y="32" width="514" height="816" rx="4" fill="none" stroke="url(#gold)" stroke-width="2" filter="url(#shadow)" />
+  <rect x="62" y="42" width="494" height="796" rx="2" fill="none" stroke="url(#gold)" stroke-width="0.75" opacity="0.7" />
+
+  <g stroke="url(#gold)" stroke-width="1.2" fill="none">
+    <path d="M 70 60 L 70 48 L 82 48 M 70 48 L 86 64" />
+    <path d="M 548 60 L 548 48 L 536 48 M 548 48 L 532 64" />
+    <path d="M 70 820 L 70 832 L 82 832 M 70 832 L 86 816" />
+    <path d="M 548 820 L 548 832 L 536 832 M 548 832 L 532 816" />
+  </g>
+
+  <g text-anchor="middle" font-family="'Playfair Display', Georgia, serif">
+    <circle cx="310" cy="140" r="32" fill="none" stroke="url(#gold)" stroke-width="1.2" />
+    <path d="M 310 115 L 310 165 M 285 140 L 335 140" stroke="url(#gold)" stroke-width="0.75" opacity="0.6" />
+    <circle cx="310" cy="140" r="18" fill="none" stroke="url(#gold)" stroke-width="0.5" stroke-dasharray="2 2" />
+
+    <text x="310" y="310" font-size="28" font-weight="700" fill="url(#gold)" letter-spacing="2" filter="url(#shadow)">
+      TO KILL A MOCKINGBIRD
+    </text>
+    
+    <line x1="200" y1="355" x2="420" y2="355" stroke="url(#gold)" stroke-width="1" />
+    <circle cx="310" cy="355" r="3.5" fill="url(#gold)" />
+
+    <text x="310" y="420" font-size="19" font-weight="500" fill="#f4ecd8" letter-spacing="3">
+      Harper Lee
+    </text>
+  </g>
+
+  <g transform="translate(230, 480)" stroke="url(#gold)" fill="none" stroke-width="1.2">
+    <rect x="0" y="0" width="160" height="120" rx="4" stroke-dasharray="3 2" opacity="0.6" />
+    <circle cx="80" cy="60" r="38" opacity="0.7" />
+    <path d="M 80 25 L 80 95 M 45 60 L 115 60" opacity="0.5" />
+    <path d="M 55 40 Q 80 15 105 40 Q 80 65 55 40 Z" fill="url(#gold)" opacity="0.25" />
+    <path d="M 55 80 Q 80 105 105 80 Q 80 55 55 80 Z" fill="url(#gold)" opacity="0.25" />
+  </g>
+
+  <g text-anchor="middle" font-family="Georgia, serif" fill="url(#gold)" opacity="0.85">
+    <text x="310" y="740" font-size="11" letter-spacing="3">J.B. LIPPINCOTT COMPANY</text>
+    <text x="310" y="764" font-size="10" font-family="'Courier New', monospace" letter-spacing="2">FIRST EDITION • 1960</text>
+  </g>
+</svg>

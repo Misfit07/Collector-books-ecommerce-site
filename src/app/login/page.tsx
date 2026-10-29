@@ -115,7 +115,7 @@ export default function LoginPage() {
         {/* Demo Credentials Quick Filler */}
         <div className="pt-4 border-t border-[#E8E2D4] space-y-2">
           <span className="text-[11px] font-mono uppercase tracking-wider text-[#8E867B] block text-center">
-            Curatorial Demo Profiles
+            Demo Accounts
           </span>
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -123,14 +123,14 @@ export default function LoginPage() {
               onClick={() => setDemoCredentials("ADMIN")}
               className="px-2.5 py-1.5 bg-[#F4EFE6] hover:bg-[#E8E2D4] text-[#7A202E] text-[11px] font-mono font-bold rounded transition-colors text-center"
             >
-              Fill Admin Demo
+              Admin
             </button>
             <button
               type="button"
               onClick={() => setDemoCredentials("COLLECTOR")}
               className="px-2.5 py-1.5 bg-[#F4EFE6] hover:bg-[#E8E2D4] text-[#1A1816] text-[11px] font-mono font-bold rounded transition-colors text-center"
             >
-              Fill Collector Demo
+              Collector
             </button>
           </div>
         </div>

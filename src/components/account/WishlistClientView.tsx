@@ -171,7 +171,7 @@ export default function WishlistClientView({
                             onClick={() => reserveBook(book.id)}
                             className="px-3 py-1.5 bg-[#1A1816] hover:bg-[#B38838] text-white text-[11px] font-bold uppercase tracking-wider rounded transition-colors"
                           >
-                            Reserve Hold
+                            Add to Cart
                           </button>
                         )}
                         <button
@@ -195,11 +195,11 @@ export default function WishlistClientView({
           <div className="bg-white border border-[#E8E2D4] rounded-lg p-6 space-y-4 shadow-xs">
             <div className="flex items-center gap-2 text-xs font-serif font-bold text-[#1A1816] uppercase tracking-wider pb-2 border-b border-[#E8E2D4]">
               <Bell className="w-4 h-4 text-[#B38838]" />
-              <span>Curatorial Author Notifications</span>
+              <span>Author Notifications</span>
             </div>
 
             <p className="text-xs text-[#5C564E] leading-relaxed">
-              Specify authors or historical creators. When newly authenticated first editions matching your criteria enter our vault, you will receive priority early access.
+              Specify authors or historical creators. When newly authenticated first editions matching your criteria are catalogued, you will receive priority early access.
             </p>
 
             {subSuccess && (

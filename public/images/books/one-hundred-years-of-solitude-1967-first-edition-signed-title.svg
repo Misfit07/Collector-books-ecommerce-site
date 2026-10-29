@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 880" width="100%" height="100%">
+  <defs>
+    <radialGradient id="paperGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#fdfbf7" />
+      <stop offset="80%" stop-color="#f5efe2" />
+      <stop offset="100%" stop-color="#eae0cf" />
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="880" fill="url(#paperGrad)" />
+  <rect x="40" y="40" width="520" height="800" fill="none" stroke="#d5c8b2" stroke-width="0.75" />
+
+  <g text-anchor="middle" font-family="'Playfair Display', 'Baskerville', 'Times New Roman', serif" fill="#1c1813">
+    <text x="300" y="180" font-size="26" font-weight="700" letter-spacing="1.5">
+      ONE HUNDRED YEARS OF SOLITUDE (CIEN AÑOS
+    </text>
+    
+    <line x1="220" y1="230" x2="380" y2="230" stroke="#8c7e6c" stroke-width="1" />
+    
+    <text x="300" y="290" font-size="13" font-style="italic" fill="#5c5344">A Rare First Edition Volume</text>
+    
+    <text x="300" y="360" font-size="12" letter-spacing="2">BY</text>
+    <text x="300" y="410" font-size="20" font-weight="600" letter-spacing="2">
+      Gabriel García Márquez
+    </text>
+
+    <g transform="translate(260, 480)" stroke="#3a3227" fill="none" stroke-width="1.2">
+      <circle cx="40" cy="40" r="38" />
+      <circle cx="40" cy="40" r="32" stroke-dasharray="2 3" />
+      <path d="M 40 12 L 40 68 M 14 40 L 66 40" />
+      <circle cx="40" cy="40" r="8" fill="#3a3227" />
+    </g>
+
+    <line x1="180" y1="680" x2="420" y2="680" stroke="#8c7e6c" stroke-width="0.75" />
+    <text x="300" y="720" font-size="12" letter-spacing="1.5">Editorial Sudamericana, Buenos Aire</text>
+    <text x="300" y="750" font-size="11" font-family="'Courier New', monospace" letter-spacing="3">ANNO DOMINI 1967</text>
+  </g>
+</svg>

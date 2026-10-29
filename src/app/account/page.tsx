@@ -124,7 +124,7 @@ export default async function AccountPage() {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 py-8">
         <div className="bg-white border border-[#E8E2D4] p-5 rounded-lg shadow-xs">
           <span className="text-[10px] font-mono uppercase text-[#8E867B] tracking-wider block">
-            Vault Acquisitions
+            Orders Completed
           </span>
           <span className="text-2xl font-serif font-bold text-[#1A1816] mt-1 block">
             {user.orders.length}
@@ -175,7 +175,7 @@ export default async function AccountPage() {
       <div className="space-y-6 pt-6">
         <div className="flex justify-between items-baseline border-b border-[#E8E2D4] pb-3">
           <h2 className="text-2xl font-serif font-bold text-[#1A1816]">
-            Permanent Acquisition Ledger
+            Order History
           </h2>
           <span className="text-xs text-[#8E867B] font-mono">
             {user.orders.length} Records Catalogued

@@ -76,15 +76,11 @@ export default async function AdminDashboardPage() {
       {/* Header */}
       <div className="pb-6 border-b border-[#E8E2D4] flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#7A202E] text-white text-[10px] font-bold uppercase tracking-wider rounded mb-2">
-            <ShieldAlert className="w-3 h-3" />
-            <span>Curatorial Administration Authority</span>
-          </div>
           <h1 className="text-3xl font-serif font-bold text-[#1A1816]">
-            Curators&apos; Executive Desk
+            Staff Administration Dashboard
           </h1>
           <p className="text-xs text-[#5C564E] mt-1 font-mono">
-            Signed in as Senior Curator: {session.user.name} ({session.user.email})
+            Signed in as Administrator: {session.user.name} ({session.user.email})
           </p>
         </div>
 

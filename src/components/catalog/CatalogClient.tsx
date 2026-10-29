@@ -208,10 +208,10 @@ export default function CatalogClient({
           The Antiquarian Guild Catalogue
         </span>
         <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#1A1816] mt-1">
-          The Curators&apos; Vault
+          Rare Books &amp; Manuscripts Catalogue
         </h1>
         <p className="text-xs sm:text-sm text-[#5C564E] mt-2 max-w-3xl leading-relaxed">
-          Explore {initialBooks.length} authenticated rare books, first impressions, inscribed association copies, and incunabula. Each volume represents an unrepeatable historical specimen.
+          Explore {initialBooks.length} authenticated rare books, first impressions, inscribed association copies, and incunabula. Each volume represents an unrepeatable historical copy.
         </p>
       </div>
 
@@ -256,11 +256,11 @@ export default function CatalogClient({
               onChange={(e) => setSortBy(e.target.value)}
               className="bg-white border border-[#DDD6C5] rounded px-2.5 py-2 text-xs text-[#1A1816] focus:outline-hidden focus:border-[#B38838]"
             >
-              <option value="featured">Curators&apos; Order</option>
-              <option value="price-desc">Valuation: High to Low</option>
-              <option value="price-asc">Valuation: Low to High</option>
-              <option value="year-asc">Antiquity: Oldest First</option>
-              <option value="year-desc">Chronology: Newest First</option>
+              <option value="featured">Featured</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="year-asc">Year: Oldest First</option>
+              <option value="year-desc">Year: Newest First</option>
               <option value="title-asc">Title: A-Z</option>
             </select>
           </div>
@@ -281,7 +281,7 @@ export default function CatalogClient({
               className={`p-2 transition-colors ${
                 viewMode === "list" ? "bg-[#1A1816] text-[#FDFBF7]" : "text-[#8E867B] hover:text-[#1A1816]"
               }`}
-              title="Archival Ledger View"
+              title="List View"
             >
               <List className="w-4 h-4" />
             </button>

@@ -61,17 +61,14 @@ export default function Navbar() {
               href="/catalog"
               className="text-[#1A1816] hover:text-[#B38838] transition-colors"
             >
-              The Vault
+              Catalogue
             </Link>
             <Link
               href="/catalog?category=auctions"
               className="flex items-center gap-1.5 text-[#1A1816] hover:text-[#B38838] transition-colors"
             >
               <Gavel className="w-4 h-4 text-[#B38838]" />
-              <span>Timed Auctions</span>
-              <span className="bg-[#7A202E] text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">
-                Live
-              </span>
+              <span>Auctions</span>
             </Link>
             <Link
               href="/catalog?signed=true"
@@ -80,10 +77,10 @@ export default function Navbar() {
               Signed Works
             </Link>
             <Link
-              href="/catalog?curator=true"
+              href="/catalog?firstEdition=true"
               className="text-[#5C564E] hover:text-[#1A1816] transition-colors"
             >
-              Curators&apos; Picks
+              First Editions
             </Link>
           </nav>
 
@@ -119,20 +116,20 @@ export default function Navbar() {
                     Signed in as <span className="font-bold text-[#1A1816]">{session.user?.email}</span>
                   </div>
                   <Link href="/account" className="block px-4 py-2 hover:bg-[#F4EFE6]">
-                    Acquisition Ledger
+                    Order History
                   </Link>
                   <Link href="/account/wishlist" className="block px-4 py-2 hover:bg-[#F4EFE6]">
-                    Saved Wishlist
+                    Saved Books
                   </Link>
                   <Link href="/account/offers" className="block px-4 py-2 hover:bg-[#F4EFE6]">
-                    Offers Desk
+                    Submitted Offers
                   </Link>
                   {(session.user as { role?: string })?.role === "ADMIN" && (
                     <Link
                       href="/admin"
                       className="block px-4 py-2 text-[#7A202E] font-bold hover:bg-[#F4EFE6] border-t border-[#E8E2D4]"
                     >
-                      Admin House
+                      Admin Dashboard
                     </Link>
                   )}
                   <button
@@ -188,7 +185,7 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="block py-2 text-base font-serif text-[#1A1816]"
           >
-            The Vault (Catalog)
+            Catalogue
           </Link>
           <Link
             href="/catalog?category=auctions"
@@ -196,7 +193,7 @@ export default function Navbar() {
             className="flex items-center gap-2 py-2 text-base font-serif text-[#1A1816]"
           >
             <Gavel className="w-4 h-4 text-[#B38838]" />
-            <span>Timed Auctions (Live)</span>
+            <span>Auctions</span>
           </Link>
           <Link
             href="/catalog?signed=true"

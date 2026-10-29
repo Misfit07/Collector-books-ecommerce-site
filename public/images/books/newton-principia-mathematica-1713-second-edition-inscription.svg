@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 880" width="100%" height="100%">
+  <defs>
+    <radialGradient id="flyleaf" cx="45%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#faf6ed" />
+      <stop offset="100%" stop-color="#eedfc5" />
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="880" fill="url(#flyleaf)" />
+  <rect x="45" y="45" width="510" height="790" fill="none" stroke="#d8cbb7" stroke-width="0.5" />
+
+  <g transform="translate(100, 260)">
+    <text font-family="'Brush Script MT', 'Edwardian Script ITC', cursive, serif" font-size="28" fill="#1b2438" opacity="0.9">
+      <tspan x="0" y="0">To my esteemed friend and colleague,</tspan>
+      <tspan x="0" y="60">in remembrance of our long discussions,</tspan>
+      <tspan x="0" y="120">with sincere admiration and highest regard,</tspan>
+      <tspan x="60" y="220" font-size="34" font-weight="bold">Sir Isaac Newton</tspan>
+      <tspan x="80" y="270" font-size="20" font-family="Georgia, serif" fill="#3d372e" opacity="0.7">Autumn, 1713</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(360, 680)" opacity="0.6">
+    <circle cx="45" cy="45" r="42" fill="none" stroke="#7a202e" stroke-width="1.5" />
+    <circle cx="45" cy="45" r="36" fill="none" stroke="#7a202e" stroke-width="0.75" stroke-dasharray="3 2" />
+    <text x="45" y="42" text-anchor="middle" font-family="monospace" font-size="8" fill="#7a202e" font-weight="bold">EX LIBRIS</text>
+    <text x="45" y="55" text-anchor="middle" font-family="monospace" font-size="7" fill="#7a202e">ARCHIVE</text>
+  </g>
+</svg>

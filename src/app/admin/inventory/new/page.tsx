@@ -226,7 +226,7 @@ export default function NewBookIntakePage() {
           {/* Section 2: Condition & Dust Jacket */}
           <div className="space-y-4">
             <h3 className="font-serif font-bold text-base text-[#1A1816] pb-2 border-b border-[#E8E2D4]">
-              2. Forensic Condition &amp; Preservation State
+              2. Physical Condition &amp; Description
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -313,7 +313,7 @@ export default function NewBookIntakePage() {
 
             <div>
               <label className="block text-xs font-medium text-[#1A1816] mb-1">
-                Ownership Chain &amp; Provenance Ledger *
+                Provenance &amp; Previous Ownership *
               </label>
               <textarea
                 rows={3}
@@ -479,7 +479,7 @@ export default function NewBookIntakePage() {
               disabled={isLoading}
               className="px-6 py-2.5 bg-[#1A1816] hover:bg-[#B38838] text-white text-xs font-bold uppercase tracking-widest rounded transition-colors shadow disabled:opacity-50"
             >
-              {isLoading ? "Cataloguing Volume..." : "Commit Specimen to Vault"}
+              {isLoading ? "Cataloguing Volume..." : "Add Volume to Catalogue"}
             </button>
           </div>
         </form>

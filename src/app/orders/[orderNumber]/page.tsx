@@ -58,7 +58,7 @@ export default async function OrderConfirmationPage({ params }: OrderPageProps) 
           href="/catalog"
           className="text-xs uppercase font-mono tracking-wider text-[#5C564E] hover:text-[#1A1816]"
         >
-          ← Return to Vault Catalogue
+          ← Return to Catalogue
         </Link>
         <PrintButton />
       </div>
@@ -97,7 +97,7 @@ export default async function OrderConfirmationPage({ params }: OrderPageProps) 
         {/* Acquired Volumes */}
         <div className="space-y-4">
           <h3 className="text-xs font-serif font-bold uppercase tracking-wider text-[#1A1816]">
-            Singular Acquired Volumes
+            Purchased Volumes
           </h3>
 
           <div className="divide-y divide-[#E8E2D4] border-y border-[#E8E2D4]">
@@ -167,7 +167,7 @@ export default async function OrderConfirmationPage({ params }: OrderPageProps) 
 
           <div className="space-y-2 sm:text-right">
             <h4 className="font-serif font-bold text-sm text-[#1A1816] mb-2">
-              Payment &amp; Forensic Record
+              Payment &amp; Order Summary
             </h4>
             <div className="flex justify-between sm:justify-end gap-4">
               <span className="text-[#8E867B]">Method:</span>

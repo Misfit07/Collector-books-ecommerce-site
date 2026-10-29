@@ -108,7 +108,7 @@ export default function AdminOffersClient({ initialOffers }: { initialOffers: Of
             Private Offer Negotiation Desk
           </h1>
           <p className="text-xs text-[#5C564E] mt-1 font-mono">
-            {offers.filter((o) => o.status === "PENDING").length} Proposals Awaiting Curatorial Response
+            {offers.filter((o) => o.status === "PENDING").length} Proposals Awaiting Review
           </p>
         </div>
       </div>
@@ -232,7 +232,7 @@ export default function AdminOffersClient({ initialOffers }: { initialOffers: Of
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white border border-[#E8E2D4] rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
             <h3 className="font-serif font-bold text-lg text-[#1A1816]">
-              Submit Official Curatorial Counter-Proposal
+              Submit Counter-Offer
             </h3>
             <form onSubmit={handleCounterSubmit} className="space-y-4">
               <div>
@@ -252,7 +252,7 @@ export default function AdminOffersClient({ initialOffers }: { initialOffers: Of
 
               <div>
                 <label className="block text-xs font-medium text-[#1A1816] mb-1">
-                  Curatorial Terms or Note
+                  Terms or Note to Collector
                 </label>
                 <textarea
                   rows={3}

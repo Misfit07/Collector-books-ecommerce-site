@@ -36,7 +36,7 @@ export default function SafeBookImage({
 
         {/* Top guild ornament */}
         <div className="flex justify-between items-center text-[9px] font-mono uppercase tracking-widest text-[#B38838] relative z-10">
-          <span>Guild Archive</span>
+          <span>Rare Book</span>
           {year && <span>{year}</span>}
         </div>
 
@@ -56,7 +56,7 @@ export default function SafeBookImage({
         {/* Bottom certification stamp */}
         <div className="flex items-center justify-center gap-1 text-[8px] font-mono tracking-wider text-[#A8A090] uppercase relative z-10">
           <Award className="w-3 h-3 text-[#B38838]" />
-          <span>ABAA Certified Volume</span>
+          <span>Antiquarian Booksellers Association</span>
         </div>
       </div>
     );

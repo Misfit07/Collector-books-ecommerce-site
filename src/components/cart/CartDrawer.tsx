@@ -39,7 +39,7 @@ export default function CartDrawer() {
           <div className="px-6 py-5 border-b border-[#E8E2D4] bg-[#F7F3E9] flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-[#B38838]" />
-              <h2 className="text-xl font-serif font-bold tracking-wide">Reserved Portfolio</h2>
+              <h2 className="text-xl font-serif font-bold tracking-wide">Shopping Cart</h2>
             </div>
             <button
               onClick={() => setIsCartOpen(false)}
@@ -54,9 +54,9 @@ export default function CartDrawer() {
           <div className="bg-[#FFF8E7] px-6 py-3 border-b border-[#EAD8B0] flex items-start gap-2 text-xs text-[#7A5B18]">
             <Clock className="w-4 h-4 shrink-0 mt-0.5 text-[#B38838]" />
             <div>
-              <p className="font-semibold">15-Minute Exclusive Hold Active</p>
+              <p className="font-semibold">15-Minute Reservation Active</p>
               <p className="mt-0.5 text-[#8A6720]">
-                These unique volumes are removed from the market for you. If the clock lapses, they return to public availability.
+                These unique volumes are reserved exclusively for you during checkout.
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function CartDrawer() {
             {items.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 text-[#5C564E]">
                 <BookOpen className="w-12 h-12 text-[#D9D1BF] mb-3 stroke-1" />
-                <p className="text-lg font-serif italic">Your acquisition portfolio is empty.</p>
+                <p className="text-lg font-serif italic">Your cart is empty.</p>
                 <p className="text-xs text-[#8E867B] mt-1">
                   Explore our curated catalogue to reserve rare first editions and signed manuscripts.
                 </p>
@@ -173,14 +173,14 @@ export default function CartDrawer() {
                   onClick={() => setIsCartOpen(false)}
                   className="px-4 py-3 bg-[#EAE3D2] text-[#1A1816] text-xs font-medium uppercase tracking-wider text-center rounded hover:bg-[#DDD4C0] transition-colors"
                 >
-                  View Ledger
+                  View Cart
                 </Link>
                 <Link
                   href="/checkout"
                   onClick={() => setIsCartOpen(false)}
                   className="px-4 py-3 bg-[#1A1816] text-[#FDFBF7] text-xs font-medium uppercase tracking-wider text-center rounded hover:bg-[#B38838] transition-colors flex items-center justify-center gap-1.5 shadow-sm"
                 >
-                  <span>Acquire Now</span>
+                  <span>Checkout</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

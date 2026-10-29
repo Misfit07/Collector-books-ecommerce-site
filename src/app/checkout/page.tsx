@@ -185,16 +185,16 @@ export default function CheckoutPage() {
     return (
       <div className="max-w-xl mx-auto px-4 py-24 text-center space-y-4">
         <h2 className="text-2xl font-serif font-bold text-[#1A1816]">
-          Your Portfolio Has Expired or is Empty
+          Your Cart is Empty or Reservation Has Expired
         </h2>
         <p className="text-xs text-[#5C564E]">
-          The 15-minute reservation timer may have lapsed. Please select your rare volumes in the catalogue to initiate a fresh exclusive hold.
+          The 15-minute reservation timer may have lapsed. Please select your rare volumes in the catalogue to initiate a fresh reservation.
         </p>
         <Link
           href="/catalog"
           className="px-6 py-3 bg-[#1A1816] text-white text-xs uppercase tracking-wider font-bold rounded inline-block"
         >
-          Return to The Vault
+          Return to Catalogue
         </Link>
       </div>
     );
@@ -212,10 +212,10 @@ export default function CheckoutPage() {
             className="text-xs font-mono uppercase tracking-wider text-[#8E867B] hover:text-[#1A1816] flex items-center gap-1 mb-2"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Portfolio Ledger</span>
+            <span>Return to Cart</span>
           </Link>
           <h1 className="text-3xl font-serif font-bold text-[#1A1816]">
-            Secure Collector Acquisition &amp; Transit
+            Checkout &amp; Shipping
           </h1>
         </div>
 
@@ -371,7 +371,7 @@ export default function CheckoutPage() {
         <div className="lg:col-span-5 space-y-6">
           <div className="bg-white border border-[#E8E2D4] rounded-lg p-6 space-y-4 shadow-sm">
             <h3 className="font-serif font-bold text-lg text-[#1A1816] pb-2 border-b border-[#E8E2D4]">
-              Singular Volume Ledger ({items.length})
+              Order Items ({items.length})
             </h3>
 
             <div className="divide-y divide-[#E8E2D4]">

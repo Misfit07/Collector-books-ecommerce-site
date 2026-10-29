@@ -15,7 +15,7 @@ export default function Footer() {
             <div>
               <h4 className="font-serif font-bold text-sm text-[#F7F4EB]">Absolute Authenticity</h4>
               <p className="text-xs text-[#9E9689] mt-1 leading-relaxed">
-                Every rare work is forensically examined. Accompanied by a verifiable cryptographic Certificate of Authenticity.
+                Every rare work is bibliographically collated and accompanied by an individual Certificate of Authenticity.
               </p>
             </div>
           </div>
@@ -25,7 +25,7 @@ export default function Footer() {
             <div>
               <h4 className="font-serif font-bold text-sm text-[#F7F4EB]">ABAA / ILAB Standards</h4>
               <p className="text-xs text-[#9E9689] mt-1 leading-relaxed">
-                Strict adherence to the Antiquarian Booksellers&apos; Association of America code of ethics and rigorous grading standards.
+                Strict adherence to the Antiquarian Booksellers&apos; Association of America code of ethics and professional grading standards.
               </p>
             </div>
           </div>
@@ -33,9 +33,9 @@ export default function Footer() {
           <div className="flex items-start gap-3">
             <BookCheck className="w-6 h-6 text-[#B38838] shrink-0 mt-1" />
             <div>
-              <h4 className="font-serif font-bold text-sm text-[#F7F4EB]">15-Minute Exclusive Hold</h4>
+              <h4 className="font-serif font-bold text-sm text-[#F7F4EB]">15-Minute Cart Reservation</h4>
               <p className="text-xs text-[#9E9689] mt-1 leading-relaxed">
-                Each physical copy is singular. Reserving places an uninterrupted lock on the title for checkout contemplation.
+                Each physical volume is singular. Adding to cart places a temporary exclusive reservation during checkout.
               </p>
             </div>
           </div>
@@ -79,22 +79,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h5 className="font-serif font-bold text-sm text-[#F7F4EB] mb-3">Curatorial Services</h5>
+            <h5 className="font-serif font-bold text-sm text-[#F7F4EB] mb-3">Collector Services</h5>
             <ul className="space-y-2 text-xs text-[#A8A090]">
-              <li><Link href="/catalog" className="hover:text-[#B38838] transition-colors">Search & Appraisal</Link></li>
-              <li><Link href="/account/offers" className="hover:text-[#B38838] transition-colors">Make an Offer</Link></li>
-              <li><Link href="/certificate/verify" className="hover:text-[#B38838] transition-colors">Verify Certificate</Link></li>
-              <li><Link href="/admin" className="hover:text-[#B38838] transition-colors">Curators&apos; Portal</Link></li>
+              <li><Link href="/catalog" className="hover:text-[#B38838] transition-colors">Search Catalogue</Link></li>
+              <li><Link href="/account/offers" className="hover:text-[#B38838] transition-colors">Submit an Offer</Link></li>
+              <li><Link href="/certificate/verify" className="hover:text-[#B38838] transition-colors">Certificate Verification</Link></li>
+              <li><Link href="/admin" className="hover:text-[#B38838] transition-colors">Staff Portal</Link></li>
               <li><Link href="/account/wishlist" className="hover:text-[#B38838] transition-colors">Author Notification Alerts</Link></li>
             </ul>
           </div>
 
           <div>
-            <h5 className="font-serif font-bold text-sm text-[#F7F4EB] mb-3">Curators&apos; Gazette</h5>
+            <h5 className="font-serif font-bold text-sm text-[#F7F4EB] mb-3">Antiquarian Gazette</h5>
             <p className="text-xs text-[#9E9689] leading-relaxed mb-3">
-              Receive private notices when museum-grade acquisitions enter the vault before public cataloging.
+              Receive notices when rare acquisitions are catalogued before public announcement.
             </p>
-            <form onSubmit={(e) => { e.preventDefault(); alert("Thank you for subscribing to the Curators' Gazette."); }} className="space-y-2">
+            <form onSubmit={(e) => { e.preventDefault(); alert("Thank you for subscribing to the Antiquarian Gazette."); }} className="space-y-2">
               <input
                 type="email"
                 required

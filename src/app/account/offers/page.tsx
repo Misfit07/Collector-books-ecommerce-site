@@ -93,7 +93,7 @@ export default async function CollectorOffersPage() {
                 >
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-[#E8E2D4] gap-2">
                     <span className="text-xs font-mono text-[#8E867B]">
-                      Proposal Transmitted: {new Date(offer.createdAt).toLocaleDateString()}
+                      Submitted: {new Date(offer.createdAt).toLocaleDateString()}
                     </span>
                     <span
                       className={`px-3 py-1 text-xs font-bold font-mono uppercase rounded ${
@@ -146,7 +146,7 @@ export default async function CollectorOffersPage() {
                     <div className="p-4 bg-[#FFF8E7] border border-[#EAD8B0] rounded space-y-2">
                       <div className="flex justify-between items-baseline">
                         <span className="font-bold text-[#7A5B18] text-xs uppercase tracking-wider">
-                          Curatorial Counter-Proposal
+                          Counter-Offer from Bookseller
                         </span>
                         <span className="font-serif font-bold text-lg text-[#1A1816]">
                           {formatPrice(offer.counterAmountInCents)}

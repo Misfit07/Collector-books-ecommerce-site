@@ -89,10 +89,10 @@ export default async function CertificatePage({ params }: CertificatePageProps) 
         <div className="text-center pb-8 border-b-2 border-[#E8E2D4] space-y-2">
           <div className="inline-flex items-center gap-2 text-xs font-mono tracking-[0.3em] uppercase text-[#B38838]">
             <ShieldCheck className="w-4 h-4" />
-            <span>The Antiquarian Guild • Board of Forensic Authentication</span>
+            <span>The Antiquarian Guild • Bureau of Authenticity</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#1A1816] tracking-tight">
-            Certificate of Archival Authenticity
+            Certificate of Authenticity
           </h1>
           <p className="text-xs font-mono text-[#8E867B] tracking-widest uppercase">
             Official Registry ID: {cert.certificateNumber}
@@ -102,7 +102,7 @@ export default async function CertificatePage({ params }: CertificatePageProps) 
         {/* Core Verification Declaration */}
         <div className="py-8 text-center max-w-2xl mx-auto space-y-4">
           <p className="font-serif italic text-base sm:text-lg text-[#1A1816] leading-relaxed">
-            This certifies that the specimen described herein has undergone rigorous physical collation, typographical census analysis, and forensic inspection in conformity with the standards of the Antiquarian Booksellers&apos; Association of America (ABAA) and the International League of Antiquarian Booksellers (ILAB).
+            This certifies that the specimen described herein has undergone rigorous physical collation, typographical census analysis, and inspection in conformity with the standards of the Antiquarian Booksellers&apos; Association of America (ABAA) and the International League of Antiquarian Booksellers (ILAB).
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default async function CertificatePage({ params }: CertificatePageProps) 
           </div>
 
           <div className="pt-2">
-            <span className="block font-mono text-[10px] uppercase text-[#8E867B]">Autograph / Provenance Forensic Finding</span>
+            <span className="block font-mono text-[10px] uppercase text-[#8E867B]">Autograph &amp; Inscription Verification</span>
             <span className="text-xs text-[#233D30] font-medium flex items-center gap-1.5 mt-0.5">
               <CheckCircle className="w-3.5 h-3.5" />
               <span>{metadata.microscopicInkAnalysis}</span>

@@ -165,7 +165,7 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
       <nav className="text-xs text-[#8E867B] font-mono mb-8 flex items-center gap-2">
         <Link href="/" className="hover:text-[#1A1816]">Guild</Link>
         <span>/</span>
-        <Link href="/catalog" className="hover:text-[#1A1816]">The Vault</Link>
+        <Link href="/catalog" className="hover:text-[#1A1816]">Catalogue</Link>
         <span>/</span>
         <span className="text-[#1A1816] font-medium truncate max-w-sm">{book.title}</span>
       </nav>
@@ -231,11 +231,11 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
             ))}
           </div>
 
-          {/* Forensic Defect Accounting Box */}
+          {/* Condition & Collation */}
           <div className="mt-8 bg-[#F7F3E9] border border-[#E8E2D4] rounded-lg p-6 space-y-3">
             <div className="flex items-center gap-2 text-xs font-serif font-bold text-[#1A1816] uppercase tracking-wider">
               <BookOpen className="w-4 h-4 text-[#B38838]" />
-              <span>Forensic Defect &amp; Physical Condition Accounting</span>
+              <span>Physical Condition &amp; Collation</span>
             </div>
             <p className="text-xs text-[#5C564E] leading-relaxed">
               {book.defectNotes}
@@ -243,7 +243,7 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
             <div className="pt-2 flex flex-wrap gap-4 text-[11px] text-[#8E867B] font-mono border-t border-[#E8E2D4]">
               <span>Dust Jacket: <strong>{book.dustJacket.replace(/_/g, " ")}</strong></span>
               <span>Binding: <strong>Original Publisher Cloth</strong></span>
-              <span>Completeness: <strong>100% Collated &amp; Verified</strong></span>
+              <span>Collation: <strong>Complete as Issued</strong></span>
             </div>
           </div>
         </div>
@@ -411,13 +411,13 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
               <div className="space-y-3">
                 <div className="p-3 bg-[#E8F2EC] text-[#1E3A2F] rounded text-xs flex items-center gap-2 font-medium border border-[#C5DDD0]">
                   <CheckCircle2 className="w-4 h-4 text-[#233D30]" />
-                  <span>Reserved exclusively in your acquisition portfolio.</span>
+                  <span>Reserved in your cart.</span>
                 </div>
                 <Link
                   href="/checkout"
                   className="w-full py-3.5 bg-[#1A1816] hover:bg-[#B38838] text-white text-xs font-bold uppercase tracking-widest text-center block rounded transition-colors shadow-md"
                 >
-                  Proceed to Final Acquisition &amp; White-Glove Dispatch
+                  Proceed to Checkout
                 </Link>
               </div>
             ) : (
@@ -434,7 +434,7 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
                   className="w-full py-3.5 bg-[#1A1816] hover:bg-[#B38838] text-white text-xs font-bold uppercase tracking-widest rounded transition-colors shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Clock className="w-4 h-4 text-[#B38838]" />
-                  <span>{isReserving ? "Locking Portfolio..." : "Reserve Volume in Cart (15m Lock)"}</span>
+                  <span>{isReserving ? "Reserving..." : "Add to Cart (15-Minute Reservation)"}</span>
                 </button>
                 <button
                   onClick={() => setIsOfferModalOpen(true)}
