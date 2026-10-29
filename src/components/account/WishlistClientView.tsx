@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import Link from "next/link";
 import { BookListing, BookImage, NotificationSubscription } from "@prisma/client";
 import { useCart } from "@/components/providers/CartProvider";
@@ -132,15 +132,14 @@ export default function WishlistClientView({
                   >
                     <div className="flex gap-4 items-center">
                       <div className="relative w-16 h-24 bg-[#EDE8DC] rounded border border-[#DDD6C5] overflow-hidden shrink-0">
-                        {cover && (
-                          <Image
-                            src={cover}
-                            alt={book.title}
-                            fill
-                            className="object-cover"
-                            sizes="64px"
-                          />
-                        )}
+                        <SafeBookImage
+                          src={cover}
+                          alt={book.title}
+                          title={book.title}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
                       </div>
                       <div>
                         <Link href={`/catalog/${book.slug}`}>

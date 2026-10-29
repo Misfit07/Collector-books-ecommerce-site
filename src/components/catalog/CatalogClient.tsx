@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import Link from "next/link";
 import { BookListing, BookImage } from "@prisma/client";
 import { useCart } from "@/components/providers/CartProvider";
@@ -518,9 +518,12 @@ export default function CatalogClient({
                       href={`/catalog/${book.slug}`}
                       className="relative h-72 bg-[#F4EFE6] block overflow-hidden border-b border-[#E8E2D4]"
                     >
-                      <Image
+                      <SafeBookImage
                         src={cover}
                         alt={book.title}
+                        title={book.title}
+                        author={book.author}
+                        year={book.year}
                         fill
                         className="object-cover group-hover:scale-104 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -625,9 +628,12 @@ export default function CatalogClient({
                       href={`/catalog/${book.slug}`}
                       className="relative w-full sm:w-32 h-44 bg-[#F4EFE6] rounded overflow-hidden shrink-0 border border-[#DDD6C5]"
                     >
-                      <Image
+                      <SafeBookImage
                         src={cover}
                         alt={book.title}
+                        title={book.title}
+                        author={book.author}
+                        year={book.year}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 150px"

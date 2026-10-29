@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import { PlusCircle, Search, ArrowLeft, Award, ExternalLink } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -85,15 +85,14 @@ export default async function AdminInventoryPage() {
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="relative w-10 h-14 bg-[#EDE8DC] rounded overflow-hidden shrink-0 border border-[#DDD6C5]">
-                          {cover && (
-                            <Image
-                              src={cover}
-                              alt={book.title}
-                              fill
-                              className="object-cover"
-                              sizes="40px"
-                            />
-                          )}
+                          <SafeBookImage
+                            src={cover}
+                            alt={book.title}
+                            title={book.title}
+                            fill
+                            className="object-cover"
+                            sizes="40px"
+                          />
                         </div>
                         <div>
                           <Link

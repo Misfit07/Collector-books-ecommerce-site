@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import { ShieldCheck, Award, Heart, DollarSign, Package, ArrowRight, Gavel } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -236,15 +236,14 @@ export default async function AccountPage() {
                       <div key={item.id} className="py-3 flex justify-between items-center">
                         <div className="flex items-center gap-3">
                           <div className="relative w-12 h-16 bg-[#EDE8DC] rounded overflow-hidden shrink-0 border border-[#DDD6C5]">
-                            {cover && (
-                              <Image
-                                src={cover}
-                                alt={item.title}
-                                fill
-                                className="object-cover"
-                                sizes="48px"
-                              />
-                            )}
+                            <SafeBookImage
+                              src={cover}
+                              alt={item.title}
+                              title={item.title}
+                              fill
+                              className="object-cover"
+                              sizes="48px"
+                            />
                           </div>
                           <div>
                             <h4 className="font-serif font-bold text-sm text-[#1A1816]">

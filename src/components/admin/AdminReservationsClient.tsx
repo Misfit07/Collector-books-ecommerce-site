@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import Link from "next/link";
 import { CartReservation, BookListing, BookImage } from "@prisma/client";
 import { Clock, Trash2, ArrowLeft, ShieldAlert } from "lucide-react";
@@ -111,15 +111,14 @@ export default function AdminReservationsClient({
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="relative w-10 h-14 bg-[#EDE8DC] rounded overflow-hidden shrink-0 border border-[#DDD6C5]">
-                          {cover && (
-                            <Image
-                              src={cover}
-                              alt={res.book.title}
-                              fill
-                              className="object-cover"
-                              sizes="40px"
-                            />
-                          )}
+                          <SafeBookImage
+                            src={cover}
+                            alt={res.book.title}
+                            title={res.book.title}
+                            fill
+                            className="object-cover"
+                            sizes="40px"
+                          />
                         </div>
                         <div>
                           <Link

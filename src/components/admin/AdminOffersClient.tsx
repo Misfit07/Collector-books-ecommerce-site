@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import Link from "next/link";
 import { Offer, BookListing, BookImage } from "@prisma/client";
 import { Check, X, CornerUpRight, ArrowLeft } from "lucide-react";
@@ -153,15 +153,14 @@ export default function AdminOffersClient({ initialOffers }: { initialOffers: Of
 
                 <div className="flex gap-4 items-center">
                   <div className="relative w-14 h-20 bg-[#EDE8DC] rounded border border-[#DDD6C5] overflow-hidden shrink-0">
-                    {cover && (
-                      <Image
-                        src={cover}
-                        alt={offer.book.title}
-                        fill
-                        className="object-cover"
-                        sizes="56px"
-                      />
-                    )}
+                    <SafeBookImage
+                      src={cover}
+                      alt={offer.book.title}
+                      title={offer.book.title}
+                      fill
+                      className="object-cover"
+                      sizes="56px"
+                    />
                   </div>
                   <div className="flex-1">
                     <Link href={`/catalog/${offer.book.slug}`}>

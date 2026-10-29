@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import { prisma } from "@/lib/prisma";
 import { ArrowRight, ShieldCheck, Gavel, Sparkles, Feather, Clock, CheckCircle } from "lucide-react";
 
@@ -121,9 +121,12 @@ export default async function HomePage() {
 
                   {/* Book Image */}
                   <div className="relative h-96 w-full bg-[#1A1816] rounded overflow-hidden shadow-inner border border-[#332E27]">
-                    <Image
+                    <SafeBookImage
                       src={heroImage}
                       alt={heroItem.title}
+                      title={heroItem.title}
+                      author={heroItem.author}
+                      year={heroItem.year}
                       fill
                       className="object-cover group-hover:scale-103 transition-transform duration-700"
                       priority
@@ -207,9 +210,12 @@ export default async function HomePage() {
                   >
                     <div>
                       <div className="relative h-64 w-full bg-[#EDE8DC] rounded overflow-hidden mb-4 border border-[#DDD6C5]">
-                        <Image
+                        <SafeBookImage
                           src={cover}
                           alt={auction.book.title}
+                          title={auction.book.title}
+                          author={auction.book.author}
+                          year={auction.book.year}
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 350px"
@@ -285,9 +291,12 @@ export default async function HomePage() {
               >
                 {/* Book Cover Container */}
                 <Link href={`/catalog/${book.slug}`} className="relative h-80 bg-[#F4EFE6] block overflow-hidden border-b border-[#E8E2D4]">
-                  <Image
+                  <SafeBookImage
                     src={cover}
                     alt={book.title}
+                    title={book.title}
+                    author={book.author}
+                    year={book.year}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -443,9 +452,12 @@ export default async function HomePage() {
                 className="group block bg-white border border-[#E8E2D4] rounded p-3 hover:border-[#B38838] hover:shadow-md transition-all"
               >
                 <div className="relative h-56 bg-[#F4EFE6] rounded overflow-hidden border border-[#EDE8DC] mb-3">
-                  <Image
+                  <SafeBookImage
                     src={cover}
                     alt={book.title}
+                    title={book.title}
+                    author={book.author}
+                    year={book.year}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform"
                     sizes="(max-width: 768px) 50vw, 25vw"

@@ -4,7 +4,7 @@ import React from "react";
 import { useCart } from "@/components/providers/CartProvider";
 import { X, Clock, Trash2, ArrowRight, ShieldCheck, BookOpen } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 
 export default function CartDrawer() {
   const { items, isCartOpen, setIsCartOpen, releaseBook, getRemainingSeconds, totalInCents } = useCart();
@@ -88,9 +88,11 @@ export default function CartDrawer() {
                     {/* Cover thumbnail */}
                     <div className="relative w-20 h-28 bg-[#EDE8DC] rounded border border-[#D9D1BF] overflow-hidden shrink-0 shadow-xs">
                       {item.coverImage ? (
-                        <Image
+                        <SafeBookImage
                           src={item.coverImage}
                           alt={item.title}
+                          title={item.title}
+                          author={item.author}
                           fill
                           className="object-cover"
                           sizes="80px"

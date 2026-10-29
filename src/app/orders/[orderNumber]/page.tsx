@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import { ShieldCheck, Award, CheckCircle2, ArrowRight, Printer, PackageCheck } from "lucide-react";
 import PrintButton from "@/components/common/PrintButton";
 
@@ -109,15 +109,14 @@ export default async function OrderConfirmationPage({ params }: OrderPageProps) 
                 <div key={item.id} className="py-5 flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between">
                   <div className="flex gap-4 items-center">
                     <div className="relative w-16 h-24 bg-[#EDE8DC] rounded border border-[#DDD6C5] overflow-hidden shrink-0">
-                      {cover && (
-                        <Image
-                          src={cover}
-                          alt={item.title}
-                          fill
-                          className="object-cover"
-                          sizes="64px"
-                        />
-                      )}
+                      <SafeBookImage
+                        src={cover}
+                        alt={item.title}
+                        title={item.title}
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                      />
                     </div>
                     <div>
                       <h4 className="font-serif font-bold text-base text-[#1A1816]">

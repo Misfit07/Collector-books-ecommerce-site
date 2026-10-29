@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import { DollarSign, ArrowLeft, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -112,15 +112,14 @@ export default async function CollectorOffersPage() {
 
                   <div className="flex gap-4 items-center">
                     <div className="relative w-16 h-24 bg-[#EDE8DC] rounded border border-[#DDD6C5] overflow-hidden shrink-0">
-                      {cover && (
-                        <Image
-                          src={cover}
-                          alt={offer.book.title}
-                          fill
-                          className="object-cover"
-                          sizes="64px"
-                        />
-                      )}
+                      <SafeBookImage
+                        src={cover}
+                        alt={offer.book.title}
+                        title={offer.book.title}
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                      />
                     </div>
                     <div>
                       <Link href={`/catalog/${offer.book.slug}`}>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Order, OrderItem } from "@prisma/client";
 import { ArrowLeft, PackageCheck, Truck, Award, CheckCircle } from "lucide-react";

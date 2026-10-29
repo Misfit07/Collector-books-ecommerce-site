@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import { useCart } from "@/components/providers/CartProvider";
 import { Clock, Trash2, ArrowRight, ShieldCheck, BookOpen, AlertTriangle, ArrowLeft } from "lucide-react";
 
@@ -86,19 +86,14 @@ export default function CartPage() {
                   <div key={item.id} className="py-6 flex gap-5 items-start">
                     {/* Thumbnail */}
                     <div className="relative w-24 h-36 bg-[#EDE8DC] rounded border border-[#D9D1BF] overflow-hidden shrink-0 shadow-xs">
-                      {item.coverImage ? (
-                        <Image
-                          src={item.coverImage}
-                          alt={item.title}
-                          fill
-                          className="object-cover"
-                          sizes="96px"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-xs text-stone-400">
-                          Rare Book
-                        </div>
-                      )}
+                      <SafeBookImage
+                        src={item.coverImage}
+                        alt={item.title}
+                        title={item.title}
+                        fill
+                        className="object-cover"
+                        sizes="96px"
+                      />
                     </div>
 
                     {/* Book Information */}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import Link from "next/link";
 import Script from "next/script";
 import { useCart } from "@/components/providers/CartProvider";
@@ -378,15 +378,14 @@ export default function CheckoutPage() {
               {items.map((item) => (
                 <div key={item.id} className="py-3 flex gap-3 items-center">
                   <div className="relative w-14 h-20 bg-[#EDE8DC] rounded border border-[#DDD6C5] overflow-hidden shrink-0">
-                    {item.coverImage && (
-                      <Image
-                        src={item.coverImage}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                        sizes="56px"
-                      />
-                    )}
+                    <SafeBookImage
+                      src={item.coverImage}
+                      alt={item.title}
+                      title={item.title}
+                      fill
+                      className="object-cover"
+                      sizes="56px"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h4 className="font-serif font-bold text-xs text-[#1A1816] line-clamp-1">

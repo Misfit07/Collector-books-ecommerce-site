@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import SafeBookImage from "@/components/common/SafeBookImage";
 import Link from "next/link";
 import { BookListing, BookImage, AuthenticityCertificate, TimedAuction, Bid } from "@prisma/client";
 import { useCart } from "@/components/providers/CartProvider";
@@ -177,9 +177,12 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
           {/* Main Selected Image */}
           <div className="relative h-[480px] sm:h-[560px] bg-[#EDE8DC] rounded-lg overflow-hidden border border-[#D9D1BF] shadow-sm group">
             {activeImage && (
-              <Image
+              <SafeBookImage
                 src={activeImage.url}
                 alt={activeImage.caption || book.title}
+                title={book.title}
+                author={book.author}
+                year={book.year}
                 fill
                 priority
                 className="object-cover cursor-zoom-in"
@@ -217,7 +220,7 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
                     : "border-[#D9D1BF] opacity-70 hover:opacity-100"
                 }`}
               >
-                <Image
+                <SafeBookImage
                   src={img.url}
                   alt={img.caption || `Photograph ${idx + 1}`}
                   fill
@@ -498,9 +501,12 @@ export default function ItemDetailClient({ book, initialInWishlist = false }: It
             </button>
           </div>
           <div className="relative flex-1 w-full max-h-[85vh]">
-            <Image
+            <SafeBookImage
               src={activeImage.url}
               alt={activeImage.caption || book.title}
+              title={book.title}
+              author={book.author}
+              year={book.year}
               fill
               className="object-contain"
             />
