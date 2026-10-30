@@ -115,6 +115,9 @@ export default function Navbar() {
                   <div className="px-4 py-2 border-b border-[#E8E2D4] text-[#5C564E]">
                     Signed in as <span className="font-bold text-[#1A1816]">{session.user?.email}</span>
                   </div>
+                  <Link href="/account" className="block px-4 py-2 hover:bg-[#F4EFE6] text-[#966E26] font-medium">
+                    Patron Points &amp; Account
+                  </Link>
                   <Link href="/account" className="block px-4 py-2 hover:bg-[#F4EFE6]">
                     Order History
                   </Link>

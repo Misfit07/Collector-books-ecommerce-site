@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import SafeBookImage from "@/components/common/SafeBookImage";
-import { ShieldCheck, Award, CheckCircle2, ArrowRight, Printer, PackageCheck } from "lucide-react";
+import { ShieldCheck, Award, CheckCircle2, ArrowRight, Printer, PackageCheck, Gift, Sparkles } from "lucide-react";
 import PrintButton from "@/components/common/PrintButton";
 
 interface OrderPageProps {
@@ -152,6 +152,38 @@ export default async function OrderConfirmationPage({ params }: OrderPageProps) 
           </div>
         </div>
 
+        {/* Complimentary Wooden Curio Prize */}
+        {order.curioPrize && (
+          <div className="bg-[#FAF7F0] border border-[#DDD6C5] rounded-lg p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#1A1816] text-[#C59B27] flex items-center justify-center shrink-0">
+                <Gift className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase text-[#B38838] font-bold tracking-wider">
+                    Complimentary Parcel Curio
+                  </span>
+                  {order.curioPrizeTier && (
+                    <span className="text-[9px] font-mono uppercase bg-[#1A1816] text-[#E8D196] px-1.5 py-0.2 rounded">
+                      {order.curioPrizeTier}
+                    </span>
+                  )}
+                </div>
+                <h4 className="font-serif font-bold text-base text-[#1A1816]">
+                  {order.curioPrize}
+                </h4>
+                <p className="text-xs text-[#5C564E]">
+                  Enclosed in custom tissue and boxed together with your volume.
+                </p>
+              </div>
+            </div>
+            <span className="text-xs font-mono font-bold text-[#233D30] bg-[#E8F2EC] px-3 py-1 rounded">
+              Included Free
+            </span>
+          </div>
+        )}
+
         {/* Shipping & Payment Meta */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4 text-xs">
           <div className="space-y-1.5">
@@ -179,10 +211,21 @@ export default async function OrderConfirmationPage({ params }: OrderPageProps) 
                 <span className="font-mono text-[#1A1816]">{order.razorpayPaymentId}</span>
               </div>
             )}
+            {order.discountInCents > 0 && (
+              <div className="flex justify-between sm:justify-end gap-4 text-[#233D30]">
+                <span>Points Allowance ({order.pointsRedeemed} pts):</span>
+                <span className="font-mono font-bold">-{formatPrice(order.discountInCents)}</span>
+              </div>
+            )}
             <div className="flex justify-between sm:justify-end gap-4 pt-2 border-t border-[#E8E2D4] font-serif font-bold text-base text-[#1A1816]">
               <span>Settled Total:</span>
               <span>{formatPrice(order.totalInCents)}</span>
             </div>
+            {order.pointsEarned > 0 && (
+              <div className="text-[11px] font-mono text-[#B38838] pt-1">
+                +{order.pointsEarned} Patron Points credited to your account
+              </div>
+            )}
           </div>
         </div>
 

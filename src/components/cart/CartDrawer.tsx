@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useCart } from "@/components/providers/CartProvider";
-import { X, Clock, Trash2, ArrowRight, ShieldCheck, BookOpen } from "lucide-react";
+import { X, Clock, Trash2, ArrowRight, ShieldCheck, BookOpen, Gift } from "lucide-react";
 import Link from "next/link";
 import SafeBookImage from "@/components/common/SafeBookImage";
 
@@ -162,9 +162,21 @@ export default function CartDrawer() {
                 </span>
               </div>
 
+              {totalInCents >= 50000 ? (
+                <div className="p-2.5 bg-[#FAF7F0] border border-[#DDD6C5] rounded-xs text-[11px] text-[#233D30] flex items-center gap-2">
+                  <Gift className="w-4 h-4 text-[#C59B27] shrink-0" />
+                  <span>Complimentary Curio Wheel spin unlocked for this parcel!</span>
+                </div>
+              ) : (
+                <div className="p-2.5 bg-[#FAF7F0] border border-[#DDD6C5] rounded-xs text-[11px] text-[#5C564E] flex items-center gap-2">
+                  <Gift className="w-4 h-4 text-[#8E867B] shrink-0" />
+                  <span>Orders over $500 unlock a free hand-crafted parcel curio spin!</span>
+                </div>
+              )}
+
               <div className="flex items-center gap-2 text-xs text-[#5C564E]">
                 <ShieldCheck className="w-4 h-4 text-[#233D30] shrink-0" />
-                <span>Includes ABAA Certificate of Authenticity & insured white-glove shipping.</span>
+                <span>Includes ABAA Certificate of Authenticity &amp; insured white-glove shipping.</span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 pt-2">

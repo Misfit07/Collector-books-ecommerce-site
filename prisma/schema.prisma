@@ -14,6 +14,7 @@ model User {
   name          String?
   passwordHash  String
   role          String    @default("CUSTOMER") // CUSTOMER | ADMIN
+  rewardPoints  Int       @default(150) // Guild Patron reward points
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -161,6 +162,11 @@ model Order {
   customerName        String
   shippingAddressJson String      // JSON string of street, city, state, postalCode, country
   totalInCents        Int
+  pointsEarned        Int         @default(0)
+  pointsRedeemed      Int         @default(0)
+  discountInCents     Int         @default(0)
+  curioPrize          String?     // e.g. "Ship in a Bottle (Hand-Carved Schooner)"
+  curioPrizeTier      String?     // e.g. "RARE", "COMMON", "FINE"
   status              String      @default("PAID") // PENDING | PAID | SHIPPED | CANCELLED
   paymentMethod       String      @default("RAZORPAY")
   razorpayOrderId     String?

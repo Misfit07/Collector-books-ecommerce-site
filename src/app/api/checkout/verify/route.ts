@@ -107,6 +107,21 @@ export async function POST(req: Request) {
         },
       });
 
+      // Update User Reward Points
+      if (order.userId) {
+        const netPointsChange = (order.pointsEarned || 0) - (order.pointsRedeemed || 0);
+        if (netPointsChange !== 0) {
+          await tx.user.update({
+            where: { id: order.userId },
+            data: {
+              rewardPoints: {
+                increment: netPointsChange,
+              },
+            },
+          });
+        }
+      }
+
       return updatedOrder;
     });
 

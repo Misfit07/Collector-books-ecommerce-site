@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import SafeBookImage from "@/components/common/SafeBookImage";
-import { ShieldCheck, Award, Heart, DollarSign, Package, ArrowRight, Gavel } from "lucide-react";
+import { ShieldCheck, Award, Heart, DollarSign, Package, ArrowRight, Gavel, Gift, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -118,6 +118,39 @@ export default async function AccountPage() {
             </Link>
           )}
         </div>
+      </div>
+
+      {/* Patron Reward Points Banner */}
+      <div className="bg-[#FAF7F0] border border-[#E0D7C3] rounded-lg p-6 shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-[#1A1816] text-[#C59B27] flex items-center justify-center shrink-0">
+            <Award className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#B38838] font-bold">
+                Guild Patronage Standing
+              </span>
+              <span className="text-[10px] font-mono uppercase bg-[#1E3A2F] text-[#E8F2EC] px-2 py-0.5 rounded font-bold">
+                Active Member
+              </span>
+            </div>
+            <h3 className="font-serif font-bold text-xl text-[#1A1816]">
+              {user.rewardPoints} Guild Patron Points
+            </h3>
+            <p className="text-xs text-[#5C564E] mt-0.5">
+              Worth ${(user.rewardPoints * 0.10).toFixed(2)} in acquisition credit &bull; Unlocks spins at the Curio Wheel
+            </p>
+          </div>
+        </div>
+
+        <Link
+          href="/catalog"
+          className="px-4 py-2 bg-[#1A1816] hover:bg-[#B38838] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center gap-1.5"
+        >
+          <span>Use Points in Catalogue</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
 
       {/* Metrics Row */}
@@ -269,6 +302,20 @@ export default async function AccountPage() {
                     );
                   })}
                 </div>
+
+                {order.curioPrize && (
+                  <div className="px-5 py-2.5 bg-[#FAF7F0] border-t border-[#E8E2D4] flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2 text-[#5C564E]">
+                      <Gift className="w-3.5 h-3.5 text-[#B38838]" />
+                      <span>Boxed Parcel Curio: <strong className="text-[#1A1816]">{order.curioPrize}</strong></span>
+                    </div>
+                    {order.curioPrizeTier && (
+                      <span className="text-[10px] font-mono uppercase bg-[#1A1816] text-[#E8D196] px-1.5 py-0.5 rounded">
+                        {order.curioPrizeTier}
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>

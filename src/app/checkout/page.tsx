@@ -7,7 +7,10 @@ import Link from "next/link";
 import Script from "next/script";
 import { useCart } from "@/components/providers/CartProvider";
 import { useSession } from "next-auth/react";
-import { ShieldCheck, Clock, Lock, ArrowLeft, CheckCircle2, AlertCircle, CreditCard } from "lucide-react";
+import { ShieldCheck, Clock, Lock, ArrowLeft, CheckCircle2, AlertCircle, CreditCard, Award, Gift, Sparkles } from "lucide-react";
+import CurioWheel from "@/components/checkout/CurioWheel";
+import CurioPrizeIcon from "@/components/checkout/CurioPrizeIcon";
+import { CurioPrize, calculatePointsEarned, calculatePointsDiscountCents } from "@/lib/curios";
 
 interface RazorpayResponse {
   razorpay_order_id: string;
@@ -58,6 +61,23 @@ export default function CheckoutPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Rewards & Curio Gacha State
+  const [selectedPrize, setSelectedPrize] = useState<CurioPrize | null>(null);
+  const [userPoints, setUserPoints] = useState<number>(0);
+  const [redeemPoints, setRedeemPoints] = useState<number>(0);
+
+  useEffect(() => {
+    // Fetch live user points
+    fetch("/api/user/points")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.points) {
+          setUserPoints(data.points);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     if (session?.user) {
       if (!name && session.user.name) setName(session.user.name);
@@ -72,6 +92,10 @@ export default function CheckoutPage() {
       maximumFractionDigits: 0,
     }).format(cents / 100);
   };
+
+  const discountInCents = calculatePointsDiscountCents(redeemPoints);
+  const finalPayableInCents = Math.max(100, totalInCents - discountInCents);
+  const pointsToEarn = calculatePointsEarned(finalPayableInCents);
 
   const handleStandardCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,6 +117,9 @@ export default function CheckoutPage() {
           postalCode,
           country,
           userId: session?.user?.id,
+          curioPrize: selectedPrize?.name,
+          curioPrizeTier: selectedPrize?.tier,
+          redeemPoints,
         }),
       });
 
@@ -334,6 +361,15 @@ export default function CheckoutPage() {
               </div>
             </div>
 
+            {/* Gacha Spin Area: The Antiquarian Curio Wheel */}
+            <CurioWheel
+              cartTotalInCents={totalInCents}
+              userPoints={userPoints}
+              selectedPrize={selectedPrize}
+              onSelectPrize={setSelectedPrize}
+              onDeductPoints={(pts) => setUserPoints((p) => Math.max(0, p - pts))}
+            />
+
             {/* Razorpay Test Mode Helper Card */}
             <div className="bg-[#F7F3E9] border border-[#EAD8B0] rounded-lg p-5 space-y-3">
               <div className="flex items-center gap-2 text-xs font-serif font-bold text-[#7A5B18]">
@@ -400,18 +436,79 @@ export default function CheckoutPage() {
               ))}
             </div>
 
+            {/* Won / Selected Curio Gift */}
+            {selectedPrize && (
+              <div className="p-3 bg-[#FAF7F0] border border-[#DDD6C5] rounded-xs flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-1 bg-white rounded border border-[#E0D7C3] shrink-0">
+                    <CurioPrizeIcon id={selectedPrize.id} className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#B38838] font-bold block">
+                      Curio Prize Boxed with Parcel
+                    </span>
+                    <span className="font-serif font-bold text-xs text-[#1A1816]">
+                      {selectedPrize.name}
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs text-[#233D30] font-mono font-bold uppercase">Included</span>
+              </div>
+            )}
+
+            {/* Reward Points Redemption Module */}
+            {userPoints > 0 && (
+              <div className="p-3.5 bg-[#FAF8F3] border border-[#E5DECD] rounded-xs space-y-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="font-serif font-bold text-[#1A1816] flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-[#C59B27]" />
+                    <span>Redeem Patron Points</span>
+                  </span>
+                  <span className="font-mono text-[11px] text-[#8E867B]">
+                    Balance: <strong className="text-[#1A1816]">{userPoints} pts</strong>
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {[0, 50, 100, 200].filter((pts) => pts === 0 || pts <= userPoints).map((pts) => (
+                    <button
+                      key={pts}
+                      type="button"
+                      onClick={() => setRedeemPoints(pts)}
+                      className={`px-2.5 py-1 text-[11px] font-mono rounded-xs border transition-colors ${
+                        redeemPoints === pts
+                          ? "bg-[#1A1816] text-[#FDFBF7] border-[#1A1816] font-bold"
+                          : "bg-white text-[#5C564E] border-[#DDD6C5] hover:border-[#1A1816]"
+                      }`}
+                    >
+                      {pts === 0 ? "No discount" : `${pts} pts (-$${((pts * 10) / 100).toFixed(0)})`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="pt-4 border-t border-[#E8E2D4] space-y-2 text-xs text-[#5C564E]">
               <div className="flex justify-between">
-                <span>Total Evaluation</span>
+                <span>Subtotal</span>
                 <span className="font-mono text-[#1A1816]">{formatPrice(totalInCents)}</span>
               </div>
+              {discountInCents > 0 && (
+                <div className="flex justify-between text-[#233D30]">
+                  <span>Patron Points Allowance ({redeemPoints} pts)</span>
+                  <span className="font-mono font-bold">-{formatPrice(discountInCents)}</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span>Museum Transit Insurance</span>
                 <span className="text-[#233D30]">Complimentary</span>
               </div>
               <div className="flex justify-between pt-2 border-t border-[#E8E2D4] font-serif font-bold text-base text-[#1A1816]">
                 <span>Total Payable</span>
-                <span className="text-xl">{formatPrice(totalInCents)}</span>
+                <span className="text-xl">{formatPrice(finalPayableInCents)}</span>
+              </div>
+              <div className="flex justify-between text-[11px] text-[#8E867B] font-mono pt-1">
+                <span>Points earned on completion:</span>
+                <span className="text-[#B38838] font-bold">+{pointsToEarn} pts</span>
               </div>
             </div>
 

@@ -58,6 +58,7 @@ async function main() {
       name: "Arthur Pendelton (Curator)",
       passwordHash: adminPasswordHash,
       role: "ADMIN",
+      rewardPoints: 500,
     },
   });
 
@@ -67,6 +68,7 @@ async function main() {
       name: "Eleanor Davenport",
       passwordHash: collectorPasswordHash,
       role: "CUSTOMER",
+      rewardPoints: 250,
     },
   });
 

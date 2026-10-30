@@ -14,6 +14,9 @@ const checkoutSchema = z.object({
   postalCode: z.string().min(2, "Postal code is required"),
   country: z.string().min(2, "Country is required"),
   userId: z.string().optional(),
+  curioPrize: z.string().optional(),
+  curioPrizeTier: z.string().optional(),
+  redeemPoints: z.number().int().min(0).optional(),
 });
 
 export async function POST(req: Request) {
@@ -38,6 +41,9 @@ export async function POST(req: Request) {
       postalCode,
       country,
       userId,
+      curioPrize,
+      curioPrizeTier,
+      redeemPoints = 0,
     } = parsed.data;
 
     const now = new Date();
@@ -71,7 +77,12 @@ export async function POST(req: Request) {
     }
 
     // Calculate total amount in cents (USD) or INR paise
-    const totalInCents = reservations.reduce((acc, curr) => acc + curr.book.priceInCents, 0);
+    const subtotalInCents = reservations.reduce((acc, curr) => acc + curr.book.priceInCents, 0);
+
+    // Points discount (10 cents per point redeemed)
+    const discountInCents = Math.min(subtotalInCents, redeemPoints * 10);
+    const finalTotalInCents = Math.max(100, subtotalInCents - discountInCents);
+    const pointsEarned = Math.floor(finalTotalInCents / 1000); // 1 point per $10 spent
 
     const keyId = process.env.RAZORPAY_KEY_ID || "rzp_test_SbLNunYxrzDbmw";
     const keySecret = process.env.RAZORPAY_KEY_SECRET || "xrfVisBaUsgZ880FJdj2Pq14";
@@ -85,8 +96,7 @@ export async function POST(req: Request) {
     const orderNumber = `ORD-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
 
     // Razorpay standard currency (INR is universally supported in test accounts; amount in paise)
-    // We convert or use INR/USD
-    const amountInSmallestUnit = Math.max(100, Math.round(totalInCents / 10)); // Scaled test amount
+    const amountInSmallestUnit = Math.max(100, Math.round(finalTotalInCents / 10)); // Scaled test amount
 
     let razorpayOrder;
     try {
@@ -126,7 +136,12 @@ export async function POST(req: Request) {
         customerEmail,
         customerName,
         shippingAddressJson,
-        totalInCents,
+        totalInCents: finalTotalInCents,
+        discountInCents,
+        pointsRedeemed: redeemPoints,
+        pointsEarned,
+        curioPrize: curioPrize || null,
+        curioPrizeTier: curioPrizeTier || null,
         status: "PENDING",
         razorpayOrderId: razorpayOrder.id,
         items: {
