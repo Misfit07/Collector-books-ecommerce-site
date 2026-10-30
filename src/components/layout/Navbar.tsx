@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/components/providers/CartProvider";
 import { useSession, signOut } from "next-auth/react";
-import { BookOpen, ShoppingBag, ShieldCheck, User, Gavel, Search, Menu, X } from "lucide-react";
+import { BookOpen, ShoppingBag, ShieldCheck, User, Gavel, Search, Menu, X, Gift } from "lucide-react";
 
 export default function Navbar() {
   const { itemCount, setIsCartOpen } = useCart();
@@ -81,6 +81,14 @@ export default function Navbar() {
               className="text-[#5C564E] hover:text-[#1A1816] transition-colors"
             >
               First Editions
+            </Link>
+            <Link
+              href="/account"
+              className="flex items-center gap-1.5 text-[#966E26] hover:text-[#B38838] transition-colors"
+              title="Guild Patron Standing, Reward Points & Wooden Curio Wheel"
+            >
+              <Gift className="w-3.5 h-3.5 text-[#B38838]" />
+              <span>Rewards &amp; Curios</span>
             </Link>
           </nav>
 
@@ -211,6 +219,14 @@ export default function Navbar() {
             className="block py-2 text-base font-serif text-[#5C564E]"
           >
             Curators&apos; Picks
+          </Link>
+          <Link
+            href="/account"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 py-2 text-base font-serif text-[#966E26]"
+          >
+            <Gift className="w-4 h-4 text-[#B38838]" />
+            <span>Patron Rewards &amp; Curios</span>
           </Link>
           <div className="pt-2 border-t border-[#E8E2D4]">
             {session ? (
